@@ -14,8 +14,8 @@ export default{
 		return {
 			banners:{},
 			recommends:{},
-			keywords:{},
-			dKeywords:{}
+			//keywords:{},
+			//dKeywords:{}
 		}
 	},
 	components:{
@@ -25,8 +25,8 @@ export default{
 		getHomeMultidata.then(res=>{
 			this.banners=res.data.banner.list
 			this.recommends=res.data.recommend.list
-			this.keywords=res.data.keywords.list
-			this.dKeywords=res.data.dKeyword.list
+			//this.keywords=res.data.keywords.list
+			//this.dKeywords=res.data.dKeyword.list
 		})
 	}
 }
