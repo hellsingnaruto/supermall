@@ -27,7 +27,7 @@ import'normalize.css'
  * */
 import 'assets/css/base.css'
 
-import MainTabBar from '@/components/content/MainTabBar'
+import MainTabBar from '@/components/content/mainTabbar/MainTabBar'
 
 export default {
   name: 'App',

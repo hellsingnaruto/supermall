@@ -10,10 +10,10 @@
 <style scoped>
 	#tab-bar{
 		display: flex;
-		position: absolute;
+		position: fixed;
 		right: 0;
 		left: 0;
-		bottom:0 ;
+		bottom:0;
 		background-color: #f1f1f1;
 		box-shadow: 0 -2px 10px rgba(200,200,200,0.6);
 	}

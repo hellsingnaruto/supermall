@@ -50,7 +50,7 @@
 				
 				//2.开启定时器
 				this.startTimer()
-			},200)
+			},500)
 		},
 		methods:{
 			/**
@@ -122,8 +122,7 @@
 					
 					//2.保存个数
 					this.slideCount=slidesEls.length
-					console.log(slidesEls)
-					console.log(slidesEls.length)
+
 					//3.如果大于1个，那么在前后分别添加一个slide
 					if(this.slideCount>1){
 						let cloneFirst=slidesEls[0].cloneNode(true)
