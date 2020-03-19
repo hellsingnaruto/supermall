@@ -17,7 +17,7 @@
 
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
-import {getHomeMultidata} from '@/network/home'
+import {getHomeMultidata,getHomeGoods} from '@/network/home'
 import HomeSwiper from './childComps/HomeSwiper'
 import RecommendView from './childComps/RecommendView'
 import FeatureView from './childComps/FeatureView'
@@ -30,7 +30,7 @@ export default{
 			recommends:[],
 			goods:{
 				pop:{page:0,list:[]},
-				news:{page:0,list:[]},
+				new:{page:0,list:[]},
 				sell:{page:0,list:[]}
 			}
 			//keywords:{},
@@ -45,12 +45,30 @@ export default{
 		TabControl
 	},
 	created(){
-		getHomeMultidata.then(res=>{
-			this.banners=res.data.banner.list
-			this.recommends=res.data.recommend.list
-			//this.keywords=res.data.keywords.list
-			//this.dKeywords=res.data.dKeyword.list
-		})
+		//1.请求轮播数据
+		this.getHomeMultidataFct()
+
+		//2.请求商品数据
+		this.getHomeGoodsFct('pop')
+		this.getHomeGoodsFct('new')
+		this.getHomeGoodsFct('sell')
+	},
+	methods:{
+		getHomeMultidataFct(){
+			getHomeMultidata.then(res=>{
+				this.banners=res.data.banner.list
+				this.recommends=res.data.recommend.list
+				//this.keywords=res.data.keywords.list
+				//this.dKeywords=res.data.dKeyword.list
+			})
+		},
+		getHomeGoodsFct(type){
+			const page=this.goods[type].page+1
+			getHomeGoods(type,page).then(res=>{
+				this.goods[type].list.push(...res.data.list)
+				this.goods[type].page+=1
+			})
+		}
 	}
 }
 </script>

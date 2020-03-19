@@ -14,6 +14,17 @@ let getHomeMultidata=request({
     url:'/home/multidata'
 })
 
+let getHomeGoods=function(type,page){
+    return request({
+        url:'/home/data',
+        params:{
+            type,
+            page
+        }
+    })
+}
+
 export {
-    getHomeMultidata
+    getHomeMultidata,
+    getHomeGoods
 }
