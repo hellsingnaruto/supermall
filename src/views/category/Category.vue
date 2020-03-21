@@ -1,6 +1,5 @@
 <template>
-	<div class="wrapper">
-		<ul class="content">
+	<scroll class="content">
 			<li>分类列表1</li>
 			<li>分类列表2</li>
 			<li>分类列表3</li>
@@ -101,30 +100,22 @@
 			<li>分类列表98</li>
 			<li>分类列表99</li>
 			<li>分类列表100</li>
-		</ul>
-	</div>
+	</scroll>
 	
 </template>
 
 <script>
-import BScroll from '@better-scroll/core'
+import Scroll from '../../components/common/scroll/Scroll'
 export default{
-	created(){
-		this.$nextTick(()=>{
-			let bs=new BScroll('.wrapper',{})
-		})
-	},
-	mounted(){
-		//let bs=new BScroll('.wrapper',{})
+	components:{
+		Scroll
 	}
 }
 </script>
 
 <style scoped>
-.wrapper{
+.content{
 	height: 300px;
 	overflow: hidden;
 }
-</style>>
-
 </style>
