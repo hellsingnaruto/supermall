@@ -5,11 +5,17 @@
 			<template v-slot:center>购物街</template>
 		</nav-bar>
 
-		<home-swiper :banners="banners" />
-		<recommend-view :recommends="recommends" />
-		<feature-view />
-		<tab-control @tabClick="tabClick" class="tab-control" :titles="['流行','新款','精选']" />
-		<goods-list :goods="showGoods" />
+		<scroll class="content" ref="scroll" :probeType="3" @scroll="contentScroll">
+			<div>
+				<home-swiper :banners="banners" />
+				<recommend-view :recommends="recommends" />
+				<feature-view />
+				<tab-control class="tab-control" @tabClick="tabClick" :titles="['流行','新款','精选']" />
+				<goods-list :goods="showGoods" />
+			</div>
+		</scroll>
+
+		<back-top @click.native="backClick" v-show="isShowBackTop" />
 
 	</div>
 </template>
@@ -22,7 +28,8 @@ import RecommendView from './childComps/RecommendView'
 import FeatureView from './childComps/FeatureView'
 import TabControl from '@/components/content/tabControl/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'
-
+import Scroll from '@/components/common/scroll/Scroll'
+import BackTop from '../../components/content/backTop/BackTop'
 export default{
 	data(){
 		return {
@@ -33,7 +40,8 @@ export default{
 				new:{page:0,list:[]},
 				sell:{page:0,list:[]}
 			},
-			currentType:'pop'
+			currentType:'pop',
+			isShowBackTop:false
 			//keywords:{},
 			//dKeywords:{}
 		}
@@ -44,7 +52,9 @@ export default{
 		RecommendView,
 		FeatureView,
 		TabControl,
-		GoodsList
+		GoodsList,
+		Scroll,
+		BackTop
 	},
 	created(){
 		//1.请求轮播数据
@@ -95,6 +105,12 @@ export default{
 					this.currentType='sell'
 					break
 			}
+		},
+		backClick(){
+			this.$refs.scroll.scrollTo(0,0)
+		},
+		contentScroll(position){
+			this.isShowBackTop= position.y<-1000
 		}
 	}
 }
@@ -102,7 +118,7 @@ export default{
 
 <style scoped>
 #home{
-	padding: 44px 0 49px;
+	padding-top: 44px;
 }
 .home-nav{
 	background-color: var(--color-tint);
@@ -116,9 +132,15 @@ export default{
 
 .tab-control{
 	position: sticky;
-	top: 44px;
-	z-index: 9;
+    top: 44px;
+	z-index: 2;
+    font-size: 15px;
 }
-</style>>
 
+.content{
+	height: 100vh;
+}
+.content>div{
+	padding-bottom: 100px;
+}
 </style>

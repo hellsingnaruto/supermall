@@ -31,7 +31,6 @@ export default {
 <style scoped>
 .tab-control{
     display: flex;
-    font-size: 15px;
     text-align: center;
     background-color: #fff;
 }

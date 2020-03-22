@@ -11,6 +11,7 @@
 	#tab-bar{
 		display: flex;
 		position: fixed;
+		z-index: 9;
 		right: 0;
 		left: 0;
 		bottom:0;

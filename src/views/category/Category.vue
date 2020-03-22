@@ -1,5 +1,6 @@
 <template>
 	<scroll class="content">
+		<div>
 			<li>分类列表1</li>
 			<li>分类列表2</li>
 			<li>分类列表3</li>
@@ -100,12 +101,13 @@
 			<li>分类列表98</li>
 			<li>分类列表99</li>
 			<li>分类列表100</li>
+		</div>
 	</scroll>
 	
 </template>
 
 <script>
-import Scroll from '../../components/common/scroll/Scroll'
+import Scroll from '@/components/common/scroll/Scroll'
 export default{
 	components:{
 		Scroll
@@ -115,7 +117,7 @@ export default{
 
 <style scoped>
 .content{
-	height: 300px;
-	overflow: hidden;
+	height: 100vh;
+	
 }
 </style>
