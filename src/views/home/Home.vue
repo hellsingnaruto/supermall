@@ -5,7 +5,7 @@
 			<template v-slot:center>购物街</template>
 		</nav-bar>
 
-		<scroll class="content" ref="scroll" :probeType="3" @scroll="contentScroll">
+		<scroll class="content" ref="scroll" :probeType="3" @scroll="contentScroll" :pullUpLoad="true" @pullingUp="loadMore">
 			<div>
 				<home-swiper :banners="banners" />
 				<recommend-view :recommends="recommends" />
@@ -64,6 +64,12 @@ export default{
 		this.getHomeGoodsFct('pop')
 		this.getHomeGoodsFct('new')
 		this.getHomeGoodsFct('sell')
+
+		//3.监听item中图片加载完成
+		
+		this.$bus.$on('itemImageLoad',()=>{
+			this.$refs.scroll && this.$refs.scroll.refresh()//这个容易出bug，所以先判断
+		})
 	},
 	computed:{
 		showGoods(){
@@ -86,7 +92,8 @@ export default{
 			const page=this.goods[type].page+1
 			getHomeGoods(type,page).then(res=>{
 				this.goods[type].list.push(...res.data.list)
-				this.goods[type].page+=1
+				this.goods[type].page=page
+				
 			})
 		},
 
@@ -106,11 +113,16 @@ export default{
 					break
 			}
 		},
-		backClick(){
+		backClick(){//回到顶部
 			this.$refs.scroll.scrollTo(0,0)
 		},
-		contentScroll(position){
+		contentScroll(position){//回到顶部是否显示
 			this.isShowBackTop= position.y<-1000
+		},
+		loadMore(){
+			console.log('上拉加载更多')
+			this.getHomeGoodsFct(this.currentType)
+			this.$refs.scroll.finishPullUp()
 		}
 	}
 }
